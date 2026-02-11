@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 17th Birthday Chloe! ✨</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f4b0be',
+                        accent: '#d4af37',
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Lato', 'sans-serif'],
+                        handwriting: ['Great Vibes', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fff9fa;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(340, 60%, 90%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(40, 60%, 85%, 0.4) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .gift-box-lid {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+        }
+        .opened .gift-box-lid {
+            transform: translateY(-100px) rotate(-10deg);
+            opacity: 0;
+        }
+        .opened .gift-box-body {
+            transform: scale(0.9) translateY(50px);
+            opacity: 0;
+        }
+        #message-overlay {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        #message-overlay.visible {
+            display: flex;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-body text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center glass-card">
+        <span class="font-display text-2xl font-bold tracking-tighter text-primary">C.</span>
+        <div class="space-x-8 text-sm uppercase tracking-widest font-bold">
+            <a href="#" class="hover:text-primary transition-colors">Home</a>
+            <a href="#memories" class="hover:text-primary transition-colors">Memories</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="pt-32 pb-12 px-4 flex flex-col items-center justify-center text-center">
+        <div class="mb-16 space-y-4">
+            <span class="text-primary font-handwriting text-5xl md:text-6xl block">Happy Birthday</span>
+            <h1 class="text-6xl md:text-8xl font-display tracking-tight">Chloe</h1>
+            <div class="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto my-6"></div>
+            <p class="text-lg md:text-xl text-gray-500 font-light max-w-lg mx-auto">
+                Seventeen years of being absolutely wonderful. Here's a little magical corner of the internet just for you.
+            </p>
+        </div>
+
+        <!-- Gift Box -->
+        <div id="gift-container" class="relative flex flex-col items-center justify-center min-h-[400px]">
+            <div id="gift-box" class="relative cursor-pointer group" onclick="toggleGift()">
+                <div class="gift-box-lid absolute z-20 w-48 h-12 bg-primary shadow-lg rounded-t-lg -top-12 left-1/2 -ml-24 flex items-center justify-center border-b-4 border-black/5">
+                    <div class="absolute h-full w-8 bg-yellow-400/80"></div>
+                    <div class="absolute -top-6 w-16 h-16 text-yellow-500">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C9 2 7 5 7 7C7 9 9 11 12 13C15 11 17 9 17 7C17 5 15 2 12 2Z"/><path d="M7 7C5 7 2 8 2 10C2 12 5 13 7 13"/><path d="M17 7C19 7 22 8 22 10C22 12 19 13 17 13"/></svg>
+                    </div>
+                </div>
+                <div class="gift-box-body w-48 h-48 bg-primary/90 rounded-b-lg shadow-xl relative flex items-center justify-center overflow-hidden border border-white/20 transition-all duration-500">
+                    <div class="absolute h-full w-8 bg-yellow-400/80"></div>
+                    <p class="absolute bottom-4 text-white/80 text-sm italic">Tap to open</p>
+                </div>
+            </div>
+
+            <!-- Message Reveal -->
+            <div id="message-overlay" class="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
+                <div class="bg-white/95 p-8 rounded-2xl shadow-2xl max-w-sm text-center border-2 border-primary/20 pointer-events-auto">
+                    <div class="text-primary text-3xl mb-4">♥</div>
+                    <h3 id="birthday-message" class="text-2xl font-display">Happy 17th Birthday Chloe! ✨</h3>
+                    <button onclick="toggleGift()" class="mt-6 text-sm text-primary font-medium underline underline-offset-4">Close & Keep Unwrapping</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Memories -->
+    <section id="memories" class="py-24 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-display mb-4">Memories</h2>
+            <p class="text-lg text-gray-500 italic">Capturing the golden moments</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform"><img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?w=800" class="w-full h-64 object-cover"></div>
+            <div class="rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform"><img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=800" class="w-full h-64 object-cover"></div>
+            <div class="rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800" class="w-full h-64 object-cover"></div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-400 text-sm tracking-widest uppercase">
+        Made with love for Chloe
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        const messages = [
+            "Happy 17th Birthday Chloe! You are the most elegant soul I know. ✨",
+            "Wishing you a day as beautiful as you are. 🌸",
+            "To my best friend, thank you for being you. 💖",
+            "May your 17th year be full of magic and joy! 🎂",
+            "You light up every room you walk into. Keep shining! 🌟",
+            "Seventeen and stunning! Have the best birthday ever! 👑",
+            "Here's to another year of aesthetic memories together. 📸",
+            "You deserve all the love and happiness in the world today. 🎁"
+        ];
+
+        function toggleGift() {
+            const container = document.getElementById('gift-container');
+            const overlay = document.getElementById('message-overlay');
+            const messageEl = document.getElementById('birthday-message');
+            
+            if (container.classList.contains('opened')) {
+                container.classList.remove('opened');
+                overlay.classList.remove('visible');
+            } else {
+                messageEl.innerText = messages[Math.floor(Math.random() * messages.length)];
+                container.classList.add('opened');
+                overlay.classList.add('visible');
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#f4b0be', '#d4af37', '#ffffff']
+                });
+            }
+        }
+    </script>
+</body>
+</html>
